@@ -1,5 +1,5 @@
 class Microphone {
-  constructor() {
+  constructor(fftSize) {
     this.initialized = false;
     navigator.mediaDevices
       .getUserMedia({ audio: true })
@@ -8,7 +8,7 @@ class Microphone {
           this.audioContext = new AudioContext();
           this.microphone = this.audioContext.createMediaStreamSource(stream);
           this.analyser = this.audioContext.createAnalyser();
-          this.analyser.fftSize = 2048;
+          this.analyser.fftSize = fftSize;
           const bufferLength = this.analyser.frequencyBinCount;
           this.dataArray = new Uint8Array(bufferLength);
           this.microphone.connect(this.analyser);
