@@ -14,7 +14,12 @@ function main() {
       this.index = index;
     }
     update(micInput) {
-      this.height = micInput * 1000;
+      const sound = micInput * 1000;
+      if (sound > this.height) {
+        this.height = sound;
+      } else {
+        this.height -= this.height * 0.01;
+      }
     }
 
     draw(context) {
